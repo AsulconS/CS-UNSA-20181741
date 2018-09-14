@@ -3,10 +3,9 @@ using namespace std;
 typedef unsigned long long ull;
 
 bool isPrime(ull num) {
-    if(!(num & 1)) return false;;
     ull d = 3;
-    while(d < num) {
-        if(num % d == 0) return false;
+    while(d <= sqrt(num)) {
+        if(!(num % d)) return false;
         else d += 2;
     }
     return true;
@@ -14,10 +13,11 @@ bool isPrime(ull num) {
 
 int main() {
     ull num; cin >> num;
-    ull accum = 0;
-    for(ull i = 2; i < num; ++i) {
+    ull accum = 2;
+    for(ull i = 3; i < num; i += 2) {
         if(isPrime(i)) accum += i;
+        cout << accum << endl;
     }
-    cout << accum << endl;
+    cout << "Winner:" << accum << endl;
     return 0;
 }
