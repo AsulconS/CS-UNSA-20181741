@@ -2,22 +2,27 @@
 using namespace std;
 typedef unsigned long long ull;
 
-bool isPrime(ull num) {
-    ull d = 3;
-    while(d <= sqrt(num)) {
-        if(!(num % d)) return false;
-        else d += 2;
+vector<bool> naturals;
+ull accum = 0;
+
+void sumationPrimes(ull n)
+{
+    naturals.assign(n + 1, 1);
+    for(ull i = 2; i <= n; ++i)
+    {
+        if(naturals[i])
+        {
+            accum += i;
+            cout << accum << endl;
+            for(ull j = i * i; j <= n; j += i)
+                naturals[j] = 0;
+        }
     }
-    return true;
 }
 
-int main() {
-    ull num; cin >> num;
-    ull accum = 2;
-    for(ull i = 3; i < num; i += 2) {
-        if(isPrime(i)) accum += i;
-        cout << accum << endl;
-    }
-    cout << "Winner:" << accum << endl;
+int main()
+{
+    ull n; cin >> n;
+    sumationPrimes(n);
     return 0;
 }
