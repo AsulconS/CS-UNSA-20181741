@@ -20,3 +20,6 @@ perfectNums
 primes
 reverse
 quickSort
+ptrToFun
+classes/*.o
+classes/main
