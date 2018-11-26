@@ -23,3 +23,5 @@ quickSort
 ptrToFun
 classes/*.o
 classes/main
+Mediator/*.o
+Mediator/main
