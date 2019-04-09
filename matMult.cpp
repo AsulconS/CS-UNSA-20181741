@@ -1,40 +1,39 @@
-#include<bits/stdc++.h>
-using namespace std;
+#include<iostream>
 
 int main()
 {
     int x, y, z;
-    cin >> x >> y >> z;
+    std::cin >> x >> y >> z;
     int a[x][y], b[y][z], c[x][y];
-    cout << endl << "Input the A Matrix:" << endl;
+    std::cout << std::endl << "Input the A Matrix:" << std::endl;
     // For A Input
     for(int i = 0; i < x; ++i)
     {
         for(int j = 0; j < y; ++j)
-            cin >> a[i][j];
+            std::cin >> a[i][j];
     }
-    cout << endl << "Input the B Matrix:" << endl;
+    std::cout << std::endl << "Input the B Matrix:" << std::endl;
     // For B Input
     for(int i = 0; i < y; ++i)
     {
         for(int j = 0; j < z; ++j)
-            cin >> b[i][j];
+            std::cin >> b[i][j];
     }
-    cout << endl << "Matrix A:" << endl;
+    std::cout << std::endl << "Matrix A:" << std::endl;
     // Print A
     for(int i = 0; i < x; ++i)
     {
         for(int j = 0; j < y; ++j)
-            cout << a[i][j] << ' ';
-        cout << endl;
+            std::cout << a[i][j] << ' ';
+        std::cout << std::endl;
     }
-    cout << endl << "Matrix B:" << endl;
+    std::cout << std::endl << "Matrix B:" << std::endl;
     // Print B
     for(int i = 0; i < y; ++i)
     {
         for(int j = 0; j < z; ++j)
-            cout << b[i][j] << ' ';
-        cout << endl;
+            std::cout << b[i][j] << ' ';
+        std::cout << std::endl;
     }
     // Mult
     for(int i = 0; i < x; ++i)
@@ -46,13 +45,13 @@ int main()
                 c[i][j] += a[i][k] * b[k][j];
         }
     }
-    cout << endl << "Matrix C:" << endl;
+    std::cout << std::endl << "Matrix C:" << std::endl;
     // Print C
     for(int i = 0; i < x; ++i)
     {
         for(int j = 0; j < z; ++j)
-            cout << c[i][j] << ' ';
-        cout << endl;
+            std::cout << c[i][j] << ' ';
+        std::cout << std::endl;
     }
     return 0;
 }
