@@ -16,18 +16,16 @@ int count(T* data, int size, T v, int base)
 
 void countingSort(int* data, int size, int base)
 {
-    size_t limit = 1;
     size_t q = 1;
-    for(size_t i = 0; i < base; ++i)
-        limit *= 10;
-    q = limit / 10;
+    for(size_t i = 0; i < base - 1; ++i)
+        q *= 10;
 
     int* output = new int[size];
-    int* index = new int[limit] {0};
+    int* index = new int[10] {0};
 
-    for(size_t i = 0; i < limit; ++i) // Counts numbers
+    for(size_t i = 0; i < 10; ++i) // Counts numbers
         index[i] = count<int>(data, size, i, base);
-    for(size_t i = 1; i < limit; ++i) // Sums the Indices
+    for(size_t i = 1; i < 10; ++i) // Sums the Indices
         index[i] += index[i - 1];
     for(int i = size - 1; i >= 0; --i) // Assign the correct ones
         output[--index[(data[i] / q) % 10]] = data[i];
