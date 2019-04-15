@@ -8,8 +8,10 @@ std::vector<bool> naturals;
 void showPrimes(ull n)
 {
     ull limit = n * n;
-    naturals.assign(limit, 1);
-    for(ull i = 1; i <= limit; ++i)
+    naturals.assign(limit + 1, 1);
+    std::cout << 1 << std::endl;
+    --n;
+    for(ull i = 2; i <= limit, n > 0; ++i)
     {
         if(naturals[i])
         {

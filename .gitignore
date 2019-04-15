@@ -25,3 +25,4 @@ classes/*.o
 classes/main
 Mediator/*.o
 Mediator/main
+CC2-P1/*.e
