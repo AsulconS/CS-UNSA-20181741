@@ -2,44 +2,59 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 #define Array  std::vector
 #define String std::string
 
-int carry42(Array<String>& arr, int index)
+String sum(String& s1, String& s2)
 {
-    int accum = 0;
-    for(size_t i = 0; i < arr.size(); ++i)
-        accum += static_cast<int>(arr[i][index] - '0');
-    if(index == 8)
-        return accum / 10;
-    return carry42(arr, index - 1);
-}
+    String res;
 
-int result(Array<String>& arr, int index, int ci, String& c)
-{
-    int accum = ci;
-    for(int i = index; i >= 0; --i)
+    int carry = 0;
+    int sum;
+
+    int s1Limit = s1.size() - 1;
+    int s2Limit = s2.size() - 1;
+    int minSize = std::min(s1Limit + 1, s2Limit + 1);
+    for(size_t i = 0; i < minSize; ++i)
     {
-        for(size_t j = 0; j < arr.size(); ++j)
-            accum += static_cast<int>(arr[i][index] - '0');
-        c[i + 2] = accum % 10;
-        accum /= 10;
+        sum = carry + s1[s1Limit - i] - '0' + s2[s2Limit - i] - '0';
+        res.push_back(static_cast<char>(sum % 10 + '0'));
+        carry = sum / 10;
     }
-    return accum;
+
+    if(s1Limit > s2Limit)
+        for(size_t i = s2.size(); i <= s1Limit; ++i)
+        {
+            sum = carry + s1[s1Limit - i] - '0';
+            res.push_back(static_cast<char>(sum % 10 + '0'));
+            carry = sum / 10;
+        }
+    else if(s2Limit > s1Limit)
+        for(size_t i = s1.size(); i <= s2Limit; ++i)
+        {
+            sum = carry + s2[s2Limit - i] - '0';
+            res.push_back(static_cast<char>(sum % 10 + '0'));
+            carry = sum / 10;
+        }
+    else
+        if(carry > 0) res.push_back(static_cast<char>(carry + '0'));
+    
+    std::reverse(res.begin(), res.end());
+    
+    return res;
 }
 
-String suma(Array<String>& arr)
+String arraySum(Array<String>& v)
 {
-    int c42 = carry42(arr, arr[0].size() - 1);
-    String sResult(10, '0');
-    int carryFinal = result(arr, 7, c42, sResult);
-    std::cout << sResult << std::endl;
-    char c1 = static_cast<char>(carryFinal / 10) + '0';
-    char c2 = static_cast<char>(carryFinal % 10) + '0';
-    sResult[0] = c1;
-    sResult[1] = c2;
-    return sResult;
+    String res = sum(v[0], v[1]);
+    
+    int size = v.size();
+    for(size_t i = 2; i < size; ++i)
+        res = sum(res, v[i]);
+    
+    return res;
 }
 
 int main()
@@ -55,6 +70,9 @@ int main()
         input >> placeholder;
         arr.push_back(placeholder);
     }
-    std::cout << suma(arr) << std::endl;
+
+    String res = arraySum(arr);
+
+    std::cout << res << std::endl;
     return 0;
 }
