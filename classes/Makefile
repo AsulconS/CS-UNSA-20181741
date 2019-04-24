@@ -1,16 +1,23 @@
-CC=g++
+CXX			= g++
+CXX_FLAGS	= -std=c++11
+OBJECTS		= main.o geometry.o sorts.o
 
-all: sorts.o geometry.o main.o
-	$(CC) sorts.o geometry.o main.o -o main
+all: build trash
 
-sorts.o: sorts.cpp
-	$(CC) -c sorts.cpp
-
-geometry.o: geometry.cpp
-	$(CC) -c geometry.cpp
+build: $(OBJECTS)
+	$(CXX) $(CXX_FLAGS) $(OBJECTS) -o main
 
 main.o:
-	$(CC) -c main.cpp
+	$(CXX) $(CXX_FLAGS) -c main.cpp
+
+geometry.o: geometry.cpp
+	$(CXX) $(CXX_FLAGS) -c geometry.cpp
+
+sorts.o: sorts.cpp
+	$(CXX) $(CXX_FLAGS) -c sorts.cpp
+
+trash:
+	rm -rf *.o
 
 clean:
 	rm -rf *.o main
